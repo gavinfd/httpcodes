@@ -16,8 +16,8 @@ class Quiz extends React.Component {
     handleClick= (answer) => {
         console.log(answer);
         let index = this.state.questionIndex;
-        if (answer === this.props.questions[index].rightAnswer){
-            if (index+1 === this.props.questions.length) {
+        if (answer === this.props.questions.questions[index].rightAnswer){
+            if (index+1 === this.props.questions.questions.length) {
                 this.setState({correct: true})
             }
             else {
@@ -26,17 +26,16 @@ class Quiz extends React.Component {
         }
     };
 
-
     render() {
         const {
           questions
         } = this.props;
-        let question = questions[this.state.questionIndex];
+        let question = questions.questions[this.state.questionIndex];
         return(
             <Question
             statusCode={question.statusCode}
             rightAnswer={question.rightAnswer}
-            answers={question.answers}
+            answers={question.randomAnswers}
             handleClick={this.handleClick}
             outcome={this.state.correct}
             />

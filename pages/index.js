@@ -1,12 +1,28 @@
 import Head from 'next/head'
 import Link from 'next/link';
+import { getQuizPacks } from '../lib/getQuizPacks'
+import { useRouter } from 'next/router';
 
-export default function Home() {
-    const question = {
-        statusCode: 200,
-        rightAnswer: "test",
-        randomAnswers: [1,2,3]
+export async function getStaticProps() {
+    const quizPacks = await getQuizPacks()
+    return {
+        props: {
+            quizPacks
+        }
     }
+}
+
+const QuizLink = quiz => (
+    <Link href="/[quiz]"  as={`/${quiz}`}>
+        <a className="card">
+            {quiz}
+        </a>
+    </Link>
+);
+
+export default function Home({quizPacks}) {
+    const { query } = useRouter();
+    const quizzes = Object.keys(quizPacks);
   return (
     <div className="container">
       <Head>
@@ -18,10 +34,14 @@ export default function Home() {
         <p className="title">
           Welcome to the Http Status Code Quiz
         </p>
-
-          <Link href="/quiz">
-              <a className="card">Start</a>
-          </Link>
+          <p>
+              Pick a question pack below to start.
+          </p>
+          <div className='grid'>
+              {quizzes.map(quiz =>
+                  QuizLink(quiz)
+              )}
+          </div>
       </main>
 
       <footer>

@@ -15,7 +15,7 @@ class Question extends React.Component {
     }
 
     renderButtons = () => {
-        let otheranswers = this.shuffleArray([...this.props.answers]);
+        let otheranswers = this.shuffleArray([...this.props.answers, this.props.rightAnswer]);
         otheranswers = this.shuffleArray(otheranswers);
         return(
             otheranswers.map(answer =>

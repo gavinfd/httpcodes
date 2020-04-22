@@ -1,29 +1,45 @@
 import Head from 'next/head'
-import Quiz from "../components/quiz";
+import Quiz from "../components/Quiz";
+import useSWR from 'swr';
+import { useRouter } from 'next/router';
+import {getQuizPacks} from "../lib/getQuizPacks";
 
-export default function QuizPage() {
-    const questions = [
-        {
-            statusCode: 200,
-            rightAnswer: 200,
-            answers: [1,2,3, 200]
-        },
-        {
-            statusCode: 201,
-            rightAnswer: 201,
-            answers: [1,2,3, 201]
-        },
-        {
-            statusCode: 202,
-            rightAnswer: 202,
-            answers: [1,2,3, 202]
-        },
-        {
-            statusCode: 203,
-            rightAnswer: 203,
-            answers: [1,2,3, 203]
-        },
-    ]
+// function fetcher(url) {
+//     return fetch(url).then(r => r.json());
+// }
+export async function getStaticPaths() {
+    const quizPacks = await getQuizPacks();
+    const quizPackNames = Object.keys(quizPacks);
+
+    let paths = [];
+    quizPackNames.forEach(quizName => paths.push({params: {quiz: quizName}}));
+    return { paths: paths,
+        fallback: false
+    }
+}
+
+export async function getStaticProps( {params} ) {
+    const quizPacks = await getQuizPacks()
+    const quiz = quizPacks[params.quiz];
+    return {
+        props: {
+            quiz
+        }
+    }
+}
+
+export default ({quiz}) => {
+
+    console.log(quiz);
+
+    // const { data, error } = useSWR(
+    //     `/api/data`,
+    //     fetcher
+    // );
+    //console.log("in method", data, error);
+    // const questions = quizPacks[router.query.quiz]
+    const questions = quiz
+    console.log(quiz);
   return (
     <div className="container">
       <Head>
@@ -183,3 +199,5 @@ export default function QuizPage() {
     </div>
   )
 }
+
+
