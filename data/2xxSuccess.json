@@ -1,0 +1,45 @@
+{
+  "name": "2xx Success",
+  "codes": [
+    {
+      "code": 200,
+      "description": "OK"
+    },
+    {
+      "code": 201,
+      "description": "Created"
+    },
+    {
+      "code": 202,
+      "description": "Accepted"
+    },
+    {
+      "code": 203,
+      "description": "Non-authoritative Information"
+    },
+    {
+      "code": 204,
+      "description": "No Content"
+    },
+    {
+      "code": 205,
+      "description": "Reset Content"
+    },
+    {
+      "code": 206,
+      "description": "Partial Content"
+    },
+    {
+      "code": 207,
+      "description": "Multi-Status"
+    },
+    {
+      "code": 208,
+      "description": "Already Reported"
+    },
+    {
+      "code": 226,
+      "description": "IM Used"
+    }
+  ]
+}

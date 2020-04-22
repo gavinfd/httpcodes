@@ -1,0 +1,37 @@
+{
+  "name": "3xx Redirection",
+  "codes": [
+    {
+      "code": 300,
+      "description": "Multiple Choices"
+    },
+    {
+      "code": 301,
+      "description": "Moved Permanently"
+    },
+    {
+      "code": 302,
+      "description": "Found"
+    },
+    {
+      "code": 303,
+      "description": "See Other"
+    },
+    {
+      "code": 304,
+      "description": "Not Modified"
+    },
+    {
+      "code": 305,
+      "description": "Use Proxy"
+    },
+    {
+      "code": 307,
+      "description": "Temporary Redirect"
+    },
+    {
+      "code": 308,
+      "description": "Permanent Redirect"
+    }
+  ]
+}

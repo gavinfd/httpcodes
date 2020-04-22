@@ -1,0 +1,53 @@
+{
+  "name": "5xx Server Error",
+  "codes": [
+    {
+      "code": 500,
+      "description": "Internal Server Error"
+    },
+    {
+      "code": 501,
+      "description": "Not Implemented"
+    },
+    {
+      "code": 502,
+      "description": "Bad Gateway"
+    },
+    {
+      "code": 503,
+      "description": "Service Unavailable"
+    },
+    {
+      "code": 504,
+      "description": "Gateway Timeout"
+    },
+    {
+      "code": 505,
+      "description": "HTTP Version Not Supported"
+    },
+    {
+      "code": 506,
+      "description": "Variant Also Negotiates"
+    },
+    {
+      "code": 507,
+      "description": "Insufficient Storage"
+    },
+    {
+      "code": 508,
+      "description": "Loop Detected"
+    },
+    {
+      "code": 510,
+      "description": "Not Extended"
+    },
+    {
+      "code": 511,
+      "description": "Network Authentication Required"
+    },
+    {
+      "code": 599,
+      "description": "Network Connect Timeout Error"
+    }
+  ]
+}
