@@ -1,45 +1,34 @@
-import Head from 'next/head'
+import Head from "next/head";
 import Quiz from "../components/Quiz";
-import useSWR from 'swr';
-import { useRouter } from 'next/router';
-import {getQuizPacks} from "../lib/getQuizPacks";
+import useSWR from "swr";
+import { useRouter } from "next/router";
+import { getQuizPacks } from "../lib/getQuizPacks";
 
 // function fetcher(url) {
 //     return fetch(url).then(r => r.json());
 // }
 export async function getStaticPaths() {
-    const quizPacks = await getQuizPacks();
-    const quizPackNames = Object.keys(quizPacks);
+  const quizPacks = await getQuizPacks();
+  const quizPackNames = Object.keys(quizPacks);
 
-    let paths = [];
-    quizPackNames.forEach(quizName => paths.push({params: {quiz: quizName}}));
-    return { paths: paths,
-        fallback: false
-    }
+  let paths = [];
+  quizPackNames.forEach((quizName) =>
+    paths.push({ params: { quiz: quizName } })
+  );
+  return { paths: paths, fallback: false };
 }
 
-export async function getStaticProps( {params} ) {
-    const quizPacks = await getQuizPacks()
-    const quiz = quizPacks[params.quiz];
-    return {
-        props: {
-            quiz
-        }
-    }
+export async function getStaticProps({ params }) {
+  const quizPacks = await getQuizPacks();
+  const quiz = quizPacks[params.quiz];
+  return {
+    props: {
+      quiz,
+    },
+  };
 }
 
-export default ({quiz}) => {
-
-    console.log(quiz);
-
-    // const { data, error } = useSWR(
-    //     `/api/data`,
-    //     fetcher
-    // );
-    //console.log("in method", data, error);
-    // const questions = quizPacks[router.query.quiz]
-    const questions = quiz
-    console.log(quiz);
+export default ({ quiz }) => {
   return (
     <div className="container">
       <Head>
@@ -48,15 +37,10 @@ export default ({quiz}) => {
       </Head>
 
       <main>
-          <Quiz
-              questions={questions}
-              >
-          </Quiz>
+        <Quiz questions={quiz}></Quiz>
       </main>
 
-      <footer>
-
-      </footer>
+      <footer></footer>
 
       <style jsx global>{`
         html,
@@ -197,7 +181,5 @@ export default ({quiz}) => {
         }
       `}</style>
     </div>
-  )
-}
-
-
+  );
+};

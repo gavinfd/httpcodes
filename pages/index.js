@@ -1,28 +1,26 @@
-import Head from 'next/head'
-import Link from 'next/link';
-import { getQuizPacks } from '../lib/getQuizPacks'
-import { useRouter } from 'next/router';
+import Head from "next/head";
+import Link from "next/link";
+import { getQuizPacks } from "../lib/getQuizPacks";
+import { useRouter } from "next/router";
 
 export async function getStaticProps() {
-    const quizPacks = await getQuizPacks()
-    return {
-        props: {
-            quizPacks
-        }
-    }
+  const quizPacks = await getQuizPacks();
+  return {
+    props: {
+      quizPacks,
+    },
+  };
 }
 
-const QuizLink = quiz => (
-    <Link href="/[quiz]"  as={`/${quiz}`}>
-        <a className="card">
-            {quiz}
-        </a>
-    </Link>
+const QuizLink = (quiz) => (
+  <Link href="/[quiz]" as={`/${quiz}`}>
+    <a className="card">{quiz}</a>
+  </Link>
 );
 
-export default function Home({quizPacks}) {
-    const { query } = useRouter();
-    const quizzes = Object.keys(quizPacks);
+export default function Home({ quizPacks }) {
+  const { query } = useRouter();
+  const quizzes = Object.keys(quizPacks);
   return (
     <div className="container">
       <Head>
@@ -31,22 +29,12 @@ export default function Home({quizPacks}) {
       </Head>
 
       <main>
-        <p className="title">
-          Welcome to the Http Status Code Quiz
-        </p>
-          <p>
-              Pick a question pack below to start.
-          </p>
-          <div className='grid'>
-              {quizzes.map(quiz =>
-                  QuizLink(quiz)
-              )}
-          </div>
+        <p className="title">Welcome to the Http Status Code Quiz</p>
+        <p>Pick a question pack below to start.</p>
+        <div className="grid">{quizzes.map((quiz) => QuizLink(quiz))}</div>
       </main>
 
-      <footer>
-
-      </footer>
+      <footer></footer>
 
       <style jsx global>{`
         html,
@@ -187,5 +175,5 @@ export default function Home({quizPacks}) {
         }
       `}</style>
     </div>
-  )
+  );
 }
