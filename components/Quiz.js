@@ -4,8 +4,10 @@ class Quiz extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      correct: false,
+      outcome: undefined,
       questionIndex: 0,
+      questionsOutcome: [],
+      quizFinished: false,
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -13,13 +15,24 @@ class Quiz extends React.Component {
   }
 
   handleClick = (answer) => {
-    console.log(answer);
     let index = this.state.questionIndex;
     if (answer === this.props.questions.questions[index].rightAnswer) {
+      this.setState({ outcome: true });
+      let outcomes = this.state.questionsOutcome;
+      outcomes.push(this.state.outcome);
+      this.setState({ questionsOutcome: outcomes });
+    } else {
+      this.setState({ outcome: false });
+      let outcomes = this.state.questionsOutcome;
+      outcomes.push(this.state.outcome);
+      this.setState({ questionsOutcome: outcomes });
+    }
+    if (answer === "next") {
       if (index + 1 === this.props.questions.questions.length) {
-        this.setState({ correct: true });
+        this.setState({ quizFinished: true });
       } else {
         this.setState({ questionIndex: index + 1 });
+        this.setState({ outcome: undefined });
       }
     }
   };
@@ -33,7 +46,9 @@ class Quiz extends React.Component {
         rightAnswer={question.rightAnswer}
         answers={question.randomAnswers}
         handleClick={this.handleClick}
-        outcome={this.state.correct}
+        outcome={this.state.outcome}
+        quizFinished={this.state.quizFinished}
+        questionsOutcome={this.state.questionsOutcome}
       />
     );
   }

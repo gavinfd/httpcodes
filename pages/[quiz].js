@@ -1,12 +1,8 @@
 import Head from "next/head";
 import Quiz from "../components/Quiz";
-import useSWR from "swr";
-import { useRouter } from "next/router";
+
 import { getQuizPacks } from "../lib/getQuizPacks";
 
-// function fetcher(url) {
-//     return fetch(url).then(r => r.json());
-// }
 export async function getStaticPaths() {
   const quizPacks = await getQuizPacks();
   const quizPackNames = Object.keys(quizPacks);
@@ -164,6 +160,68 @@ export default ({ quiz }) => {
         }
 
         .card p {
+          margin: 0;
+          font-size: 1.25rem;
+          line-height: 1.5;
+        }
+
+        .card-right {
+          margin: 1rem;
+          flex-basis: 45%;
+          padding: 1.5rem;
+          text-align: left;
+          color: inherit;
+          text-decoration: none;
+          border: 1px solid #eaeaea;
+          border-radius: 10px;
+          border-color: #1eb500;
+          transition: color 0.15s ease, border-color 0.15s ease;
+        }
+
+        .card-right:hover,
+        .card-right:focus,
+        .card-right:active {
+          color: #26ff00;
+          border-color: #26ff00;
+        }
+
+        .card-right h3 {
+          margin: 0 0 1rem 0;
+          font-size: 1.5rem;
+        }
+
+        .card-right p {
+          margin: 0;
+          font-size: 1.25rem;
+          line-height: 1.5;
+        }
+
+        .card-wrong {
+          margin: 1rem;
+          flex-basis: 45%;
+          padding: 1.5rem;
+          text-align: left;
+          color: inherit;
+          text-decoration: none;
+          border: 1px solid #eaeaea;
+          border-radius: 10px;
+          border-color: #a80000;
+          transition: color 0.15s ease, border-color 0.15s ease;
+        }
+
+        .card-wrong:hover,
+        .card-wrong:focus,
+        .card-wrong:active {
+          color: #ff0000;
+          border-color: #ff0000;
+        }
+
+        .card-wrong h3 {
+          margin: 0 0 1rem 0;
+          font-size: 1.5rem;
+        }
+
+        .card-wrong p {
           margin: 0;
           font-size: 1.25rem;
           line-height: 1.5;
